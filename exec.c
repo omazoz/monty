@@ -14,7 +14,7 @@ int execute(char *content, stack_t **stack, unsigned int count, FILE *file)
 	instruction_t opst[] = {
 		{"push", add_node}, {"pall", print_all}, {"pint", print},
 		{"pop", pop_func}, {"swap", swap_elem}, {"add", add_to_stack},
-		{"nop", noth}, {"sub", substract}, {"div", div},
+		{"nop", noth}, {"sub", substract}, {"div", my_div},
 		{"mul", multiply}, {"mod", remain}, {"pchar", print_char},
 		{"pstr", print_string}, {"rotl", rotate_to_top}, {"rotr", rotate_to_bot},
 		{"queue", print_top}, {"stack", print_top},

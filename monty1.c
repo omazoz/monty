@@ -97,13 +97,13 @@ void multiply(stack_t **head, unsigned int count)
 }
 
 /**
- * div - function that divides the top two elements of the stack
+ * my_div - function that divides the top two elements of the stack
  * @head: double head pointer to the stack
  * @count: line count
  *
  * Return: nothing
  */
-void div(stack_t **head, unsigned int count)
+void my_div(stack_t **head, unsigned int count)
 {
 	stack_t *h;
 	int len = 0, tmp;

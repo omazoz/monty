@@ -73,7 +73,7 @@ void swap_elem(stack_t **head, unsigned int count);
 void add_to_stack(stack_t **head, unsigned int count);
 void noth(stack_t **head, unsigned int count);
 void substract(stack_t **head, unsigned int count);
-void div(stack_t **head, unsigned int count);
+void my_div(stack_t **head, unsigned int count);
 void multiply(stack_t **head, unsigned int count);
 void remain(stack_t **head, unsigned int count);
 void print_char(stack_t **head, unsigned int count);

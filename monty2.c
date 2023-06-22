@@ -33,7 +33,7 @@ void add_node(stack_t **head, unsigned int count)
 		exit(EXIT_FAILURE); }
 	i = atoi(bus.arg);
 	if (bus.lifi == 0)
-		addnode(head, i);
+		add_node(head, i);
 	else
-		addqueue(head, i);
+		add_queue(head, i);
 }
