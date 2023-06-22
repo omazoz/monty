@@ -1,39 +1,45 @@
 #include "monty.h"
-
 /**
-* f_push - function that adds node to the stack
-* @head: double head pointer to the stack
-* @count: line count
-*
-* Return: nothing
-*/
-void add_node(stack_t **head, unsigned int count)
+ *pop - removes the last inserted element
+ *@counter: number of lines  in the file
+ *@stack: pointer to the pointer to the head
+ *Return: nothing
+ */
+void pop(stack_t **stack, unsigned int counter)
 {
-	int i, m = 0, flag = 0;
-
-	if (bus.arg)
-	{
-		if (bus.arg[0] == '-')
-			m++;
-		for (; bus.arg[m] != '\0'; m++)
-		{
-			if (bus.arg[m] > 57 || bus.arg[m] < 48)
-				flag = 1; }
-		if (flag == 1)
-		{ fprintf(stderr, "L%d: usage: push integer\n", count);
-			fclose(bus.file);
-			free(bus.content);
-			free_stack(*head);
-			exit(EXIT_FAILURE); }}
-	else
-	{ fprintf(stderr, "L%d: usage: push integer\n", count);
-		fclose(bus.file);
-		free(bus.content);
-		free_stack(*head);
-		exit(EXIT_FAILURE); }
-	i = atoi(bus.arg);
-	if (bus.lifi == 0)
-		add_node(head, i);
-	else
-		add_queue(head, i);
+stack_t *end;
+if (stack == NULL)
+{
+printf("L%u: can't pop an empty stack\n", counter);
+exit(EXIT_FAILURE);
 }
+else if (*stack == NULL)
+{
+printf("L%u: can't pop an empty stack\n", counter);
+exit(EXIT_FAILURE);
+}
+else
+{
+end = *stack;
+*stack = (*stack)->next;
+free(end);
+}
+return;
+}
+
+#include "monty.h"
+/**
+*pint - print the data at the top
+*@stack: double pointer th the head
+*@counter: number of lines
+*Return: nothing
+*/
+void pint(stack_t **stack, unsigned int __attribute__((unused)) counter)
+{
+if (stack == NULL || *stack == NULL)
+{
+fprintf(stderr, "L%d: can't pint, stack empty\n", counter);
+exit(EXIT_FAILURE);
+}
+printf("%d\n", (*stack)->n);
+}	

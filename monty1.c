@@ -1,180 +1,41 @@
 #include "monty.h"
 
 /**
- * add_to_stack - function that adds the top two elements of the stack
- * @head: double pointer head to the stack
- * @count: line count
- *
- * Return: nothing
- */
-void add_to_stack(stack_t **head, unsigned int count)
+* len - length of stack
+* @stack: pointer that point to stack
+* Return: unsigned int
+**/
+unsigned int len(stack_t **stack)
 {
-	stack_t *h;
-	int len = 0, tmp;
+stack_t *curr;
+unsigned int l = 0;
 
-	h = *head;
-	while (h)
-	{
-		h = h->next;
-		len++;
-	}
-	if (len < 2)
-	{
-		fprintf(stderr, "L%d: can't add, stack too short\n", count);
-		fclose(bus.file);
-		free(bus.content);
-		free_stack(*head);
-		exit(EXIT_FAILURE);
-	}
-	h = *head;
-	tmp = h->n + h->next->n;
-	h->next->n = tmp;
-	*head = h->next;
-	free(h);
+curr = *stack;
+while (curr)
+{
+curr = curr->next;
+l++;
+}
+return (l);
 }
 
 /**
- * substract - function that substracts nodes
- * @head: double head pointer to the stack
- * @count: line count
- *
- * Return: nothing
- */
-void substract(stack_t **head, unsigned int count)
-{
-	stack_t *tmp;
-	int sub, node;
+*pall - function to print stack's elements
+*@counter: will not be used , we usse attribute not void
+*@stack: pointer to the head of the doubly linked list
+*Return: Nothing
+*/
 
-	tmp = *head;
-	for (node = 0; tmp != NULL; node++)
-		tmp = tmp->next;
-	if (node < 2)
-	{
-		fprintf(stderr, "L%d: can't sub, stack too short\n", count);
-		fclose(bus.file);
-		free(bus.content);
-		free_stack(*head);
-		exit(EXIT_FAILURE);
-	}
-	tmp = *head;
-	sub = tmp->next->n - tmp->n;
-	tmp->next->n = sub;
-	*head = tmp->next;
-	free(tmp);
+void pall(stack_t **stack, unsigned int __attribute__((unused)) counter)
+{
+stack_t *curr = *stack;
+
+if (stack == NULL || *stack == NULL)
+return;
+
+while (curr != NULL)
+{
+printf("%d\n", curr->n);
+curr = curr->next;
 }
-
-/**
- * multiply - function that multiplies the top two elements of the stack
- * @head: double head pointer to the stack
- * @count: line count
- *
- * Return: nothing
- */
-void multiply(stack_t **head, unsigned int count)
-{
-	stack_t *h;
-	int len = 0, tmp;
-
-	h = *head;
-	while (h)
-	{
-		h = h->next;
-		len++;
-	}
-	if (len < 2)
-	{
-		fprintf(stderr, "L%d: can't mul, stack too short\n", count);
-		fclose(bus.file);
-		free(bus.content);
-		free_stack(*head);
-		exit(EXIT_FAILURE);
-	}
-	h = *head;
-	tmp = h->next->n * h->n;
-	h->next->n = tmp;
-	*head = h->next;
-	free(h);
-}
-
-/**
- * my_div - function that divides the top two elements of the stack
- * @head: double head pointer to the stack
- * @count: line count
- *
- * Return: nothing
- */
-void my_div(stack_t **head, unsigned int count)
-{
-	stack_t *h;
-	int len = 0, tmp;
-
-	h = *head;
-	while (h)
-	{
-		h = h->next;
-		len++;
-	}
-	if (len < 2)
-	{
-		fprintf(stderr, "L%d: can't div, stack too short\n", count);
-		fclose(bus.file);
-		free(bus.content);
-		free_stack(*head);
-		exit(EXIT_FAILURE);
-	}
-	h = *head;
-	if (h->n == 0)
-	{
-		fprintf(stderr, "L%d: division by zero\n", count);
-		fclose(bus.file);
-		free(bus.content);
-		free_stack(*head);
-		exit(EXIT_FAILURE);
-	}
-	tmp = h->next->n / h->n;
-	h->next->n = tmp;
-	*head = h->next;
-	free(h);
-}
-
-/**
- * remain - function that computes the remainder of the division of the second
- * top element of the stack by the top element of the stack
- * @head: double head pointer to the stack
- * @count: line count
- *
- * Return: nothing
- */
-void remain(stack_t **head, unsigned int count)
-{
-	stack_t *h;
-	int len = 0, tmp;
-
-	h = *head;
-	while (h)
-	{
-		h = h->next;
-		len++;
-	}
-	if (len < 2)
-	{
-		fprintf(stderr, "L%d: can't mod, stack too short\n", count);
-		fclose(bus.file);
-		free(bus.content);
-		free_stack(*head);
-		exit(EXIT_FAILURE);
-	}
-	h = *head;
-	if (h->n == 0)
-	{
-		fprintf(stderr, "L%d: division by zero\n", count);
-		fclose(bus.file);
-		free(bus.content);
-		free_stack(*head);
-		exit(EXIT_FAILURE);
-	}
-	tmp = h->next->n % h->n;
-	h->next->n = tmp;
-	*head = h->next;
-	free(h);
 }

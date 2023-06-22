@@ -1,58 +1,65 @@
 #include "monty.h"
-
+#include <string.h>
 /**
-* pop_func - function that prints the top of the stack
-* @head: double head pointer to the stack
-* @count: line count
-*
-* Return: nothing
+*push - add a neode in the list
+*@stack: pointer to a pointer to the doubly linked list
+*@counter: line where there is an error
+*Return: nothing
 */
-void pop_func(stack_t **head, unsigned int count)
+void push(stack_t **stack, char *n, unsigned int counter)
 {
-	stack_t *h;
+	stack_t *new = NULL;
+	int i;
 
-	if (*head == NULL)
+	new = malloc(sizeof(stack_t));
+	if (new == NULL)
 	{
-		fprintf(stderr, "L%d: can't pop an empty stack\n", count);
-		fclose(bus.file);
-		free(bus.content);
-		free_stack(*head);
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	h = *head;
-	*head = h->next;
-	free(h);
-}
-
-/**
-* print - function that prints the top of the stack
-* @head: double head pointer to the stack
-* @count: line count
-*
-* Return: nothing
-*/
-void print(stack_t **head, unsigned int count)
-{
-	if (*head == NULL)
+	if (n == NULL)
 	{
-		fprintf(stderr, "L%u: can't pint, stack empty\n", count);
-		fclose(bus.file);
-		free(bus.content);
-		free_stack(*head);
+		fprintf(stderr, "L%d: usage: push integer\n", counter);
 		exit(EXIT_FAILURE);
 	}
-	printf("%d\n", (*head)->n);
+	for (i = 0; n[i]; i++)
+	{
+		if (n[0] == '-' && i == 0)
+			continue;
+		if (n[i] < 48 || n[i] > 57)
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", counter);
+			exit(EXIT_FAILURE);
+		}
+	}
+	new->n = atoi(n);
+	new->prev = NULL;
+	new->next = NULL;
+	if (*stack != NULL)
+	{
+		new->next = *stack;
+		(*stack)->prev = new;
+	}
+	*stack = new;
 }
 
 /**
-* noth - function that does nothing
-* @head: double head pointer to the stack
-* @count: line count
-*
-* Return: nothing
-*/
-void noth(stack_t **head, unsigned int count)
+* swap - swaps the value of the top two elements to the stack
+* @stack: pointer that point to stack
+* @counter: line number of instruction
+* Return: void, exit with -1 on failure
+**/
+void swap(stack_t **stack, unsigned int counter)
 {
-	(void) count;
-	(void) head;
+	int i;
+
+	if (len(stack) < 2)
+	{
+		fprintf(stderr, "L%d: can't swap, stack too short\n", counter);
+		exit(EXIT_FAILURE);
+	}
+	i = (*stack)->n;
+	(*stack)->n = (*stack)->next->n;
+	(*stack)->next->n = i;
 }
+
